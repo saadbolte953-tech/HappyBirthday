@@ -288,12 +288,22 @@ html, body {
   transform: translateY(15px) scale(0.98);
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 8px var(--screen-padding) calc(70px + max(10px, env(safe-area-inset-bottom)));
+  justify-content: flex-start;
+  padding: 8px var(--screen-padding) calc(14px + max(10px, env(safe-area-inset-bottom)));
   transition: opacity 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
   overflow-y: auto;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
+}
+
+.welcome-container,
+.intro-container,
+.cake-container,
+.balloons-container,
+.memories-container,
+.letter-screen-container,
+.finale-container {
+  margin-block: auto;
 }
 
 .screen.active {
@@ -348,18 +358,14 @@ html, body {
 
 /* Universal Primary Continue Button */
 .continue-btn-wrap {
-  position: absolute;
-  bottom: max(16px, env(safe-area-inset-bottom));
-  left: 0;
-  right: 0;
+  position: relative;
+  width: 100%;
   display: flex;
   justify-content: center;
+  margin-top: auto;
+  padding: 16px 0 10px 0;
   z-index: 50;
-  pointer-events: none;
-}
-
-.continue-btn-wrap > * {
-  pointer-events: auto;
+  flex-shrink: 0;
 }
 
 .btn-continue {
@@ -1507,18 +1513,22 @@ html, body {
   }
 
   .welcome-arena {
-    flex-direction: column;
-    justify-content: space-around;
-    padding: 16px;
-    height: 380px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    height: clamp(230px, 36vh, 290px);
   }
 
   .bow-station {
-    height: 140px;
+    width: 90px;
+    height: 180px;
   }
 
   .gift-target-wrap {
-    transform: scale(0.85);
+    width: 130px;
+    height: 130px;
+    transform: scale(0.8);
   }
 
   .cake-stage {

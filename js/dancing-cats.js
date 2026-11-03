@@ -15,6 +15,7 @@ class DancingCatsCelebration {
     this.restartBtn = document.getElementById('btn-replay-journey');
 
     this.isPlaying = true;
+    this.mode = 'canvas';
     this.animationFrameId = null;
 
     // Cat dance state
@@ -103,13 +104,12 @@ class DancingCatsCelebration {
     const ctx = this.canvas.getContext('2d');
 
     const render = () => {
-      if (this.mode === 'canvas') {
-        const width = (this.canvas.width = 800);
-        const height = (this.canvas.height = 450);
+      const width = (this.canvas.width = 800);
+      const height = (this.canvas.height = 450);
 
-        if (this.isPlaying) {
-          this.danceTick += 0.05;
-        }
+      if (this.isPlaying) {
+        this.danceTick += 0.05;
+      }
 
         // Draw Stage Background
         const grad = ctx.createRadialGradient(400, 225, 50, 400, 225, 450);
@@ -154,7 +154,6 @@ class DancingCatsCelebration {
         ctx.textAlign = 'center';
         ctx.fillText('✨ Happy Birthday Ifrah! 🐾🎂', 400, 48);
         ctx.restore();
-      }
 
       this.animationFrameId = requestAnimationFrame(render);
     };
