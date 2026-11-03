@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Happy Birthday Ifrah! 🤍 | A Special Birthday Surprise</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎀</text></svg>">
+
+  <!-- Google Fonts: Elegant Serifs, Modern Sans & Cute Handwriting -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+
+  <!-- Ambient Twinkling Stars & Particles Background Canvas -->
+  <canvas id="ambient-canvas"></canvas>
+
+  <!-- Confetti Engine Canvas -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <div class="app-viewport">
+
+    <!-- Top Persistent Navigation Bar -->
+    <header class="top-nav">
+      <!-- Back Button -->
+      <button id="btn-top-back" class="nav-btn" disabled title="Go to previous surprise">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+        <span>Back</span>
+      </button>
+
+      <!-- 7 Steps Indicator Dots -->
+      <div class="step-indicator" title="Journey Progress">
+        <div class="step-dot active" data-step="1"></div>
+        <div class="step-dot" data-step="2"></div>
+        <div class="step-dot" data-step="3"></div>
+        <div class="step-dot" data-step="4"></div>
+        <div class="step-dot" data-step="5"></div>
+        <div class="step-dot" data-step="6"></div>
+        <div class="step-dot" data-step="7"></div>
+      </div>
+
+      <!-- Persistent Music Player Widget -->
+      <div id="music-player-widget" class="music-player-widget" title="Play / Pause Music">
+        <div class="music-vinyl"></div>
+        <div class="music-info">
+          <span class="music-title">Birthday Melody</span>
+          <span class="music-artist">For Ifrah 🤍</span>
+        </div>
+        <div class="music-bars">
+          <div class="music-bar"></div>
+          <div class="music-bar"></div>
+          <div class="music-bar"></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Screens Container (Step-by-Step State Machine) -->
+    <main class="screens-wrapper">
+
+      <!-- ==================================================================
+           SCREEN 1: WELCOME & BOW-AND-ARROW GIFT OPENING
+           ================================================================== -->
+      <section id="screen-welcome" class="screen active" data-screen-number="1">
+        <div class="screen-header">
+          <span class="badge-tag">A Special Gift from Zubair 🎀</span>
+          <h1 class="screen-title">Happy Birthday, Ifrah!</h1>
+          <p class="screen-subtitle">Pull back the bow and shoot the arrow to unlock your birthday surprise! 🏹✨</p>
+        </div>
+
+        <div class="welcome-container">
+          <div id="welcome-arena" class="welcome-arena">
+            <!-- Trajectory canvas guide line -->
+            <canvas id="trajectory-canvas" class="trajectory-guide"></canvas>
+
+            <!-- Bow & Arrow Station -->
+            <div id="bow-station" class="bow-station" title="Drag arrow back and release!">
+              <svg id="bow-svg" viewBox="0 0 100 220">
+                <!-- Bow Wood Limbs -->
+                <path d="M 70 20 C 30 70 30 150 70 200" stroke="#7e22ce" stroke-width="7" stroke-linecap="round" fill="none"/>
+                <path d="M 70 20 C 32 70 32 150 70 200" stroke="#c084fc" stroke-width="3" stroke-linecap="round" fill="none"/>
+                
+                <!-- Bow Grip -->
+                <rect x="36" y="96" width="10" height="28" rx="4" fill="#581c87"/>
+
+                <!-- Dynamic Bow String -->
+                <path id="bow-string" d="M 70 20 Q 70 110 70 200" stroke="#ffffff" stroke-width="2.5" fill="none"/>
+
+                <!-- Bow Arrow Group -->
+                <g id="bow-arrow-group">
+                  <line x1="15" y1="110" x2="88" y2="110" stroke="#9333ea" stroke-width="3.5" stroke-linecap="round"/>
+                  <!-- Arrow tip -->
+                  <polygon points="88,103 102,110 88,117" fill="#7e22ce"/>
+                  <!-- Feather fletching -->
+                  <polygon points="22,103 32,110 22,117" fill="#fde047"/>
+                  <polygon points="15,103 25,110 15,117" fill="#d8b4fe"/>
+                </g>
+              </svg>
+            </div>
+
+            <!-- Target: Gift Box with 3D Satin Bow -->
+            <div class="gift-target-wrap">
+              <div class="target-glow-ring"></div>
+              <div id="gift-box-3d" class="gift-box-3d" title="Hit with arrow or tap to unwrap!">
+                <!-- Body -->
+                <div class="gift-box-body">
+                  <div class="ribbon-vertical"></div>
+                  <div class="ribbon-horizontal"></div>
+                </div>
+                <!-- Lid -->
+                <div class="gift-box-lid">
+                  <div class="ribbon-vertical"></div>
+                </div>
+                <!-- Bow -->
+                <div class="gift-bow">
+                  <div class="bow-loop-left"></div>
+                  <div class="bow-loop-right"></div>
+                  <div class="bow-knot"></div>
+                </div>
+                <!-- Surprise Reveal Card -->
+                <div class="gift-reveal-content">
+                  <div class="reveal-card">
+                    <span>✨ A birthday surprise awaits you, twin! 🎁</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Aim Helper and Assist Button -->
+          <div class="bow-instructions">
+            <div class="bow-hint">
+              <span>🎯 Drag the arrow back towards the left and release!</span>
+            </div>
+            <button id="btn-assist-shoot" class="btn-assist-shoot">
+              <span>Auto Aim & Shoot</span> 🏹
+            </button>
+          </div>
+        </div>
+
+        <div class="continue-btn-wrap">
+          <button id="btn-continue-welcome" class="btn-continue hidden">
+            <span>Open Birthday Surprise</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           SCREEN 2: BIRTHDAY INTRODUCTION & GREETING
+           ================================================================== -->
+      <section id="screen-intro" class="screen" data-screen-number="2">
+        <div class="screen-header">
+          <span class="badge-tag">Friendship Celebration • November 4 🗓️</span>
+          <h1 class="screen-title">Happy Birthday, Ifrah! 🎀✨</h1>
+          <p class="screen-subtitle">To the most awesome duo partner, twin, and genuine friend.</p>
+        </div>
+
+        <div class="intro-container">
+          <div class="intro-card">
+            <div class="intro-sparkle-ribbon">🎮 🤍 🍰 🎀</div>
+            <p class="intro-message">
+              Another year older, another year of chaotic Free Fire matches, random 3 AM talks, and roasting each other. You've been such a genuine, supportive, and amazing friend, twin. Hope your 4th of November is packed with happiness, huge smiles, and everything that makes you happy! 💜
+            </p>
+
+            <div class="intro-friendship-badges">
+              <div class="f-badge">
+                <span class="f-badge-icon">🎮</span>
+                <span class="f-badge-title">Free Fire Duo</span>
+                <span class="f-badge-desc">Where our story started</span>
+              </div>
+              <div class="f-badge">
+                <span class="f-badge-icon">💬</span>
+                <span class="f-badge-title">3 AM Rants</span>
+                <span class="f-badge-desc">Random talks & laughs</span>
+              </div>
+              <div class="f-badge">
+                <span class="f-badge-icon">😈</span>
+                <span class="f-badge-title">Teasing Twin</span>
+                <span class="f-badge-desc">Annoying each other 24/7</span>
+              </div>
+              <div class="f-badge">
+                <span class="f-badge-icon">🤍</span>
+                <span class="f-badge-title">HG & HB</span>
+                <span class="f-badge-desc">Always in each other's corner</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="continue-btn-wrap">
+          <button id="btn-continue-intro" class="btn-continue">
+            <span>Continue to Chocolate Cake</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           SCREEN 3: CHOCOLATE BIRTHDAY CAKE (INTUITIVE & INTERACTIVE)
+           ================================================================== -->
+      <section id="screen-cake" class="screen" data-screen-number="3">
+        <div class="screen-header">
+          <span class="badge-tag">Ifrah's Absolute Favourite 🍫</span>
+          <h1 class="screen-title">Chocolate Birthday Cake</h1>
+          <p class="screen-subtitle">Tap the candles to blow them out, then cut a slice of your favorite cake!</p>
+        </div>
+
+        <div class="cake-container">
+          <div id="cake-stage" class="cake-stage">
+            <!-- Golden Cutting Knife Cursor Element -->
+            <div id="cake-knife-indicator" class="knife-cursor-wrap" style="display: none;">
+              <svg width="50" height="50" viewBox="0 0 60 60" fill="none">
+                <polygon points="5,5 35,35 28,42 2,12" fill="#d4af37" stroke="#ffffff" stroke-width="1.5"/>
+                <polygon points="35,35 55,55 50,60 30,40" fill="#78350f"/>
+              </svg>
+            </div>
+
+            <!-- Vector Chocolate Cake SVG -->
+            <svg id="cake-svg" class="cake-svg-wrapper" viewBox="0 0 400 320">
+              <defs>
+                <!-- Rich Chocolate Frosting Gradient -->
+                <linearGradient id="chocFrosting" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#451a03"/>
+                  <stop offset="50%" stop-color="#3b1302"/>
+                  <stop offset="100%" stop-color="#260c01"/>
+                </linearGradient>
+
+                <linearGradient id="chocGanache" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#78350f"/>
+                  <stop offset="100%" stop-color="#451a03"/>
+                </linearGradient>
+
+                <linearGradient id="goldPlate" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#fef08a"/>
+                  <stop offset="50%" stop-color="#fde047"/>
+                  <stop offset="100%" stop-color="#eab308"/>
+                </linearGradient>
+              </defs>
+
+              <!-- Cake Plate Stand -->
+              <ellipse cx="200" cy="275" rx="170" ry="24" fill="url(#goldPlate)" stroke="#ca8a04" stroke-width="2"/>
+              <ellipse cx="200" cy="270" rx="155" ry="18" fill="#ffffff" opacity="0.6"/>
+
+              <!-- BOTTOM CAKE TIER (Chocolate Fudge) -->
+              <rect x="75" y="170" width="250" height="95" rx="12" fill="url(#chocFrosting)"/>
+              
+              <!-- Bottom Tier Ganache Drips -->
+              <path d="M 75 180 Q 95 210 115 180 Q 135 215 155 180 Q 180 220 205 180 Q 230 215 250 180 Q 275 215 295 180 Q 315 205 325 180 L 325 170 L 75 170 Z" fill="url(#chocGanache)"/>
+
+              <!-- TOP CAKE TIER (Rich Dark Chocolate) -->
+              <rect x="115" y="95" width="170" height="80" rx="10" fill="url(#chocFrosting)"/>
+
+              <!-- Top Tier Ganache Drips -->
+              <path d="M 115 105 Q 130 130 145 105 Q 165 135 185 105 Q 205 130 225 105 Q 245 135 265 105 Q 275 125 285 105 L 285 95 L 115 95 Z" fill="url(#chocGanache)"/>
+
+              <!-- Chocolate Cream Rosettes & Sprinkles -->
+              <circle cx="125" cy="94" r="8" fill="#78350f"/>
+              <circle cx="155" cy="94" r="8" fill="#78350f"/>
+              <circle cx="185" cy="94" r="8" fill="#78350f"/>
+              <circle cx="215" cy="94" r="8" fill="#78350f"/>
+              <circle cx="245" cy="94" r="8" fill="#78350f"/>
+              <circle cx="275" cy="94" r="8" fill="#78350f"/>
+
+              <!-- Rainbow/White Sprinkles -->
+              <circle cx="140" cy="120" r="2.5" fill="#fde047"/>
+              <circle cx="190" cy="130" r="2.5" fill="#f472b6"/>
+              <circle cx="230" cy="125" r="2.5" fill="#ffffff"/>
+              <circle cx="255" cy="140" r="2.5" fill="#c084fc"/>
+
+              <!-- Interactive Cake Slice Group (Slides out on cut) -->
+              <g id="cake-slice-group">
+                <!-- Golden Birthday Candles -->
+                <!-- Candle 1 -->
+                <g class="candle-group">
+                  <rect x="155" y="45" width="8" height="50" rx="3" fill="#f3e8ff" stroke="#a855f7" stroke-width="1.5"/>
+                  <line x1="159" y1="45" x2="159" y2="38" stroke="#374151" stroke-width="1.5"/>
+                  <path id="flame-1" class="candle-flame" d="M 159 38 C 153 30 155 22 159 16 C 163 22 165 30 159 38 Z" fill="#fde047" stroke="#ea580c" stroke-width="1"/>
+                </g>
+
+                <!-- Candle 2 (Center) -->
+                <g class="candle-group">
+                  <rect x="196" y="38" width="8" height="57" rx="3" fill="#faf5ff" stroke="#7e22ce" stroke-width="1.5"/>
+                  <line x1="200" y1="38" x2="200" y2="30" stroke="#374151" stroke-width="1.5"/>
+                  <path id="flame-2" class="candle-flame" d="M 200 30 C 193 22 195 14 200 8 C 205 14 207 22 200 30 Z" fill="#fde047" stroke="#ea580c" stroke-width="1"/>
+                </g>
+
+                <!-- Candle 3 -->
+                <g class="candle-group">
+                  <rect x="237" y="45" width="8" height="50" rx="3" fill="#f3e8ff" stroke="#a855f7" stroke-width="1.5"/>
+                  <line x1="241" y1="45" x2="241" y2="38" stroke="#374151" stroke-width="1.5"/>
+                  <path id="flame-3" class="candle-flame" d="M 241 38 C 235 30 237 22 241 16 C 245 22 247 30 241 38 Z" fill="#fde047" stroke="#ea580c" stroke-width="1"/>
+                </g>
+
+                <!-- Cut Slice Plate & Wedge (Visible after cut) -->
+                <g id="cut-wedge-visual" style="opacity: 0; transition: opacity 0.4s ease;">
+                  <ellipse cx="285" cy="228" rx="42" ry="12" fill="url(#goldPlate)" stroke="#ca8a04" stroke-width="1.5"/>
+                  <polygon points="260,222 285,178 312,222" fill="#451a03"/>
+                  <polygon points="260,222 285,178 272,178 245,222" fill="#78350f"/>
+                  <circle cx="285" cy="174" r="6" fill="#ef4444"/>
+                  <circle cx="285" cy="174" r="2.5" fill="#fde047"/>
+                  <text x="285" y="244" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="10" text-anchor="middle" fill="#ca8a04">For Ifrah 🍫</text>
+                </g>
+              </g>
+            </svg>
+          </div>
+
+          <!-- Intuitive Cake Controls & Status -->
+          <div class="cake-instructions-box">
+            <span id="cake-status-text" class="cake-status-text">Make a wish & blow the candles! 💨</span>
+            <button id="btn-cake-action" class="cake-step-action-btn">
+              <span>Blow Candles</span> 💨
+            </button>
+          </div>
+        </div>
+
+        <div class="continue-btn-wrap">
+          <button id="btn-continue-cake" class="btn-continue hidden">
+            <span>Continue to Balloons</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           SCREEN 4: EXACTLY FIVE INTERACTIVE BALLOONS
+           ================================================================== -->
+      <section id="screen-balloons" class="screen" data-screen-number="4">
+        <div class="screen-header">
+          <span class="badge-tag">Five Birthday Wishes 🎈</span>
+          <h1 class="screen-title">Pop All 5 Balloons!</h1>
+          <p class="screen-subtitle">Tap each floating balloon to reveal a personal message from Zubair.</p>
+        </div>
+
+        <div class="balloons-container" id="balloons-screen-container">
+          <div id="balloons-counter-text" class="balloons-counter">Balloons Popped: 0 of 5</div>
+
+          <!-- EXACTLY FIVE BALLOONS -->
+          <div class="balloons-sky">
+            <!-- Balloon 1 -->
+            <div class="balloon-item balloon-1" data-balloon-index="1" title="Pop me!">
+              <div class="balloon-sphere">
+                <span class="balloon-number-badge">1</span>
+                <div class="balloon-knot"></div>
+              </div>
+              <div class="balloon-string"></div>
+            </div>
+
+            <!-- Balloon 2 -->
+            <div class="balloon-item balloon-2" data-balloon-index="2" title="Pop me!">
+              <div class="balloon-sphere">
+                <span class="balloon-number-badge">2</span>
+                <div class="balloon-knot"></div>
+              </div>
+              <div class="balloon-string"></div>
+            </div>
+
+            <!-- Balloon 3 -->
+            <div class="balloon-item balloon-3" data-balloon-index="3" title="Pop me!">
+              <div class="balloon-sphere">
+                <span class="balloon-number-badge">3</span>
+                <div class="balloon-knot"></div>
+              </div>
+              <div class="balloon-string"></div>
+            </div>
+
+            <!-- Balloon 4 -->
+            <div class="balloon-item balloon-4" data-balloon-index="4" title="Pop me!">
+              <div class="balloon-sphere">
+                <span class="balloon-number-badge">4</span>
+                <div class="balloon-knot"></div>
+              </div>
+              <div class="balloon-string"></div>
+            </div>
+
+            <!-- Balloon 5 -->
+            <div class="balloon-item balloon-5" data-balloon-index="5" title="Pop me!">
+              <div class="balloon-sphere">
+                <span class="balloon-number-badge">5</span>
+                <div class="balloon-knot"></div>
+              </div>
+              <div class="balloon-string"></div>
+            </div>
+          </div>
+
+          <!-- Active Message Display Card -->
+          <div id="balloon-active-message-card" class="balloon-active-message-card">
+            <span id="balloon-quote-text" class="balloon-quote-text">✨ Tap any balloon above to read its wish! 🤍</span>
+          </div>
+        </div>
+
+        <div class="continue-btn-wrap">
+          <button id="btn-continue-balloons" class="btn-continue hidden">
+            <span>Continue to Memories</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           SCREEN 5: PERSONAL MEMORIES GALLERY (5 REPLACEABLE PHOTOGRAPHS)
+           ================================================================== -->
+      <section id="screen-memories" class="screen" data-screen-number="5">
+        <div class="screen-header">
+          <span class="badge-tag">Free Fire & Friendship Moments 📸</span>
+          <h1 class="screen-title">Our Memory Vault</h1>
+          <p class="screen-subtitle">Five snapshots of games, laughs, and moments. (Tap photo to view, tap 📷 to customize!)</p>
+        </div>
+
+        <div class="memories-container">
+          <div class="memories-grid">
+            <!-- Photo 1 -->
+            <div class="memory-polaroid" data-photo-id="1">
+              <div class="memory-tape"></div>
+              <div class="memory-img-box">
+                <img class="memory-img" alt="Memory 1" src="assets/memory1.jpeg">
+              </div>
+              <div class="memory-caption">That random Free Fire match where it all started 🎮✨</div>
+            </div>
+
+            <!-- Photo 2 -->
+            <div class="memory-polaroid" data-photo-id="2">
+              <div class="memory-tape"></div>
+              <div class="memory-img-box">
+                <img class="memory-img" alt="Memory 2" src="assets/memory2.jpeg">
+              </div>
+              <div class="memory-caption">Clutch moments & carrying the squad together 🏆</div>
+            </div>
+
+            <!-- Photo 3 -->
+            <div class="memory-polaroid" data-photo-id="3">
+              <div class="memory-tape"></div>
+              <div class="memory-img-box">
+                <img class="memory-img" alt="Memory 3" src="assets/memory3.jpeg">
+              </div>
+              <div class="memory-caption">To many more Booyahs in game and in real life! 🤍</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lightbox Modal for Photo Zoom -->
+        <div id="photo-modal" class="photo-modal">
+          <div class="modal-content-card">
+            <button id="modal-close-btn" class="modal-close-btn">&times;</button>
+            <img id="modal-img" src="" alt="Memory Zoom" style="width: 100%; border-radius: 14px; object-fit: contain; max-height: 55vh;">
+            <p id="modal-caption" style="margin-top: 14px; font-weight: 700; color: #4c1d95;"></p>
+          </div>
+        </div>
+
+        <div class="continue-btn-wrap">
+          <button id="btn-continue-memories" class="btn-continue">
+            <span>Continue to Birthday Letter</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           SCREEN 6: PERSONAL BIRTHDAY LETTER (WAX SEAL & ENVELOPE)
+           ================================================================== -->
+      <section id="screen-letter" class="screen" data-screen-number="6">
+        <div class="screen-header">
+          <span class="badge-tag">From Zubair with Respect & Appreciation 💌</span>
+          <h1 class="screen-title">A Letter For Ifrah</h1>
+          <p class="screen-subtitle">Tap the wax seal to unseal and read your birthday letter.</p>
+        </div>
+
+        <div class="letter-screen-container">
+          <!-- Interactive Wax Seal Envelope -->
+          <div id="envelope-wrapper" class="envelope-wrapper" title="Tap to open the envelope!">
+            <div class="envelope-box">
+              <div class="envelope-flap"></div>
+              <div class="wax-seal">
+                <span>Z 🤍 I</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Unfolded Letter Parchment Modal (Exact Verbatim Text) -->
+          <div id="letter-paper-modal" class="letter-paper-modal">
+            <div class="letter-heading-tag">
+              <span>Dear Ifrah,</span>
+              <span>🎀 04.11</span>
+            </div>
+            <div class="letter-body-text">
+"Happy birthday, Ifrahhh! 😭🤍 Hope your day is full of smiles and little things that make you happy.
+
+Twin, I'll always appreciate how you believed in me when I doubted myself. It means more than I probably say.
+
+I'm glad a random Free Fire match brought us into each other's lives. Here's to more memories, random talks, and annoying each other as usual. 😭💀
+
+Stay happy and take care of yourself, shawty! 🎂🎀
+
+— Your HB, Zubair 🫶🏻"
+            </div>
+          </div>
+        </div>
+
+        <div class="continue-btn-wrap">
+          <button id="btn-continue-letter" class="btn-continue hidden">
+            <span>Continue to Final Celebration</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           SCREEN 7: DANCING CATS BIRTHDAY CELEBRATION VIDEO & GRAND FINALE
+           ================================================================== -->
+      <section id="screen-final" class="screen" data-screen-number="7">
+        <div class="screen-header">
+          <span class="badge-tag">The Grand Finale 🐾🎉</span>
+          <h1 class="finale-grand-title">Happy Birthday, Ifrah! 🤍</h1>
+          <p class="screen-subtitle">The cats are bringing the cake and dancing just for your special day!</p>
+        </div>
+
+        <div class="finale-container">
+          <div class="celebration-player-card">
+            <div class="media-display-viewport">
+              <!-- Live 60fps HTML5 Canvas Animated Dancing Cats Show -->
+              <canvas id="cats-canvas"></canvas>
+            </div>
+
+            <!-- Video Player & Show Controls -->
+            <div class="video-control-bar">
+              <div class="player-btn-group">
+                <button id="btn-video-play" class="v-ctrl-btn">
+                  <span>Pause</span> ⏸
+                </button>
+                <button id="btn-video-replay" class="v-ctrl-btn">
+                  <span>Replay</span> ↺
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Final Celebration Actions -->
+          <div class="finale-actions">
+            <button id="btn-confetti-cannon" class="btn-confetti-cannon">
+              <span>Shoot Confetti!</span> 🎊
+            </button>
+            <button id="btn-replay-journey" class="btn-replay-journey">
+              <span>Replay Surprise from Beginning</span> ↺
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/audio.js"></script>
+  <script src="js/bow-arrow.js"></script>
+  <script src="js/cake.js"></script>
+  <script src="js/balloons.js"></script>
+  <script src="js/memories.js"></script>
+  <script src="js/envelope.js"></script>
+  <script src="js/dancing-cats.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
